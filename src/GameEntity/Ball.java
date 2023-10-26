@@ -30,7 +30,7 @@ public class Ball extends Entity implements GameEntity {
 
 	@Override
 	public void render(Graphics2D g) {
-		g.setColor(Color.darkGray);
+		g.setColor(Color.orange);
 		g.fillOval(x, y, 20, 20);
 		Toolkit.getDefaultToolkit().sync(); // Flush the Linux graphics buffer
 	}
