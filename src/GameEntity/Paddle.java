@@ -2,13 +2,13 @@ package GameEntity;
 import Game.Game;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.time.LocalTime;
 
-import Game.Game;
 public class Paddle extends Entity implements GameEntity, MouseMotionListener, MouseListener{
 	private double paddleX, mouseX;
 	public Paddle() {
@@ -19,6 +19,7 @@ public class Paddle extends Entity implements GameEntity, MouseMotionListener, M
 		paddleX = (Game.Width - width)/2;
 		mouseX= paddleX;
 		y = Game.Hight - 80;
+		isAlive = true;
 	}
 	
 	
@@ -28,12 +29,14 @@ public class Paddle extends Entity implements GameEntity, MouseMotionListener, M
 		paddleX += ( mouseX - paddleX - width/2) * .05;
 		if( paddleX >= Game.Width - width)
 			paddleX = Game.Width -width;
+		if(paddleX <= 0)
+			paddleX = 0;
 	}
 
 	@Override
 	public void render(Graphics2D g) {
 		g.setColor(Color.WHITE);
-		g.fillRoundRect((int)paddleX,y,width,hight,15,15);
+		g.fillRoundRect((int)paddleX,(int)y,width,hight,15,15);
 		Toolkit.getDefaultToolkit().sync();
 	}
 
@@ -91,6 +94,14 @@ public class Paddle extends Entity implements GameEntity, MouseMotionListener, M
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	@Override
+	public Rectangle getHitbox() {
+		// TODO Auto-generated method stub
+		return new Rectangle((int)paddleX,(int) y,width,hight);
 	}
 
 }

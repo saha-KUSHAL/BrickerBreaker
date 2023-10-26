@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
@@ -20,8 +21,8 @@ public class GamePanel extends JPanel {
 		setPreferredSize(new Dimension(Game.Width,Game.Hight));
 		setDoubleBuffered(true);
 		setBackground(new Color(43,60,78));
-		ball = new Ball();
 		paddle = new Paddle();
+		ball = new Ball(paddle);
 		addMouseMotionListener(paddle);
 		addMouseListener(paddle);
 	}
@@ -38,5 +39,9 @@ public class GamePanel extends JPanel {
 		ball.render(g2);
 		paddle.render(g2);
 		g.dispose();
+	}
+	
+	public Rectangle getPaddleHitbox() {
+		return paddle.getHitbox();
 	}
 }

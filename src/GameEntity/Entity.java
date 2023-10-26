@@ -4,6 +4,7 @@ public class Entity {
 
 		protected int width;
 		protected int hight;
-		protected int dx , dy;
-		protected int x , y;
+		protected double dx , dy;
+		protected double x , y;
+		public boolean isAlive;
 }
