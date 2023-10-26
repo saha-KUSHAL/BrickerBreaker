@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.time.LocalTime;
 
 import Game.Game;
 public class Paddle extends Entity implements GameEntity, MouseMotionListener, MouseListener{
@@ -56,7 +57,8 @@ public class Paddle extends Entity implements GameEntity, MouseMotionListener, M
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		Ball.isMouseClicked = true;
-		
+		if(Game.debug)
+			System.out.println("Mouse clicked: Paddle|" + LocalTime.now());
 	}
 
 

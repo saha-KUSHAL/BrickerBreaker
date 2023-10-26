@@ -13,8 +13,9 @@ public class Game implements Runnable {
 	public GameWindow gameWindow;
 	private Thread gameThread;
 	private GamePanel gamePanel;
-	
-	public Game() {
+	public static boolean debug;
+	public Game(boolean debugState) {
+		debug =debugState;
 		gamePanel = new GamePanel();
 		gameWindow = new GameWindow(gamePanel);
 		gameLoop();
@@ -59,7 +60,7 @@ public class Game implements Runnable {
 				update();
 				deltaU--;
 			}
-
+			if(debug)
 			if (System.currentTimeMillis() - lastFPSCheck >= 1000) {
 				lastFPSCheck = System.currentTimeMillis();
 				System.out.println("FPS: " + fps_count + " | UPS: " + ups_count);
