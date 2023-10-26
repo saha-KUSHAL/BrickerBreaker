@@ -8,23 +8,27 @@ import java.awt.Toolkit;
 
 public class Ball extends Entity implements GameEntity {
 
+	public static boolean isMouseClicked = false;
+
 	public Ball() {
 		hight = 20;
 		width = 20;
 		dx = 3;
-		dy = 1;
+		dy = -1;
 		x = (Game.Width - width) / 2;
 		y = Game.Hight - 100;
 	}
 
 	@Override
 	public void update() {
-		x += dx;
-		y += dy;
-		if (x <= 0 || x >= Game.Width - width)
-			dx = -dx;
-		if (y <= 0 || y >= Game.Hight - hight)
-			dy = -dy;
+		if (isMouseClicked) {
+			x += dx;
+			y += dy;
+			if (x <= 0 || x >= Game.Width - width)
+				dx = -dx;
+			if (y <= 0 || y >= Game.Hight - hight)
+				dy = -dy;
+		}
 
 	}
 

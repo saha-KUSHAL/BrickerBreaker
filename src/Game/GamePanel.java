@@ -13,6 +13,7 @@ import GameEntity.Paddle;
 public class GamePanel extends JPanel {
 
 	
+	private static final long serialVersionUID = 1L;
 	private Ball ball;
 	private Paddle paddle;
 	public GamePanel() {
@@ -21,6 +22,8 @@ public class GamePanel extends JPanel {
 		setBackground(new Color(43,60,78));
 		ball = new Ball();
 		paddle = new Paddle();
+		addMouseMotionListener(paddle);
+		addMouseListener(paddle);
 	}
 	
 	protected void update() {
