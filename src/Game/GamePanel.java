@@ -6,12 +6,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import GameEntity.Ball;
 import GameEntity.Brick;
 import GameEntity.BrickLoader;
 import GameEntity.Paddle;
+import Utils.Score;
 
 public class GamePanel extends JPanel {
 
@@ -19,23 +22,26 @@ public class GamePanel extends JPanel {
 	private Ball ball;
 	private Paddle paddle;
 	private BrickLoader brickLoader;
-
+	private Score score;
 	public GamePanel() {
 		setPreferredSize(new Dimension(Game.Width, Game.Hight));
 		setDoubleBuffered(true);
 		setBackground(new Color(43, 60, 78));
+		
 		paddle = new Paddle();
 		ball = new Ball(paddle);
 		addMouseMotionListener(paddle);
 		addMouseListener(paddle);
 		brickLoader = new BrickLoader(ball);
+		score = new Score();
 	}
 
 	protected void update() {
-		if (ball.getAlive() && brickLoader.BrickCount != 0) {
+		if (ball.getAlive() && BrickLoader.BrickCount != 0) {
 			ball.update();
 			paddle.update();
 			brickLoader.update();
+			score.update();
 		} else {
 			System.exit(0);
 		}
@@ -49,6 +55,7 @@ public class GamePanel extends JPanel {
 		ball.render(g2);
 		paddle.render(g2);
 		brickLoader.render(g2);
+		score.render(g2);
 		g.dispose();
 	}
 }

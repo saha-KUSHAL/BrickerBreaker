@@ -35,11 +35,9 @@ public class Ball extends Entity implements GameEntity {
 		return isAlive;
 	}
 
-	private void setPostition() {
+	protected void checkCollision(Rectangle r) {
 		// double tempX = x, tempY = y;
-		Rectangle paddleHitbox = paddle.getHitbox();
-
-		checkCollision((int) (x + dx), (int) y, paddleHitbox);
+		checkCorners((int) (x + dx), (int) y, r);
 
 		// If the ball is towards left
 		if (dx < 0)
@@ -51,7 +49,7 @@ public class Ball extends Entity implements GameEntity {
 			if (topRight || bottomRight)
 				dx = -dx;
 
-		checkCollision((int) x, (int) (y + dy), paddleHitbox);
+		checkCorners((int) x, (int) (y + dy), r);
 
 		if (dy < 0)
 			if (topRight || topLeft)
@@ -63,7 +61,7 @@ public class Ball extends Entity implements GameEntity {
 
 	}
 
-	protected void checkCollision(int x, int y, Rectangle r) {
+	private void checkCorners(int x, int y, Rectangle r) {
 		topLeft = topRight = bottomLeft = bottomRight = false;
 		topLeft = r.contains(new Point(x, y));
 		bottomLeft = r.contains(new Point(x, y + hight));
@@ -89,7 +87,7 @@ public class Ball extends Entity implements GameEntity {
 			}
 		}
 		if (isAlive)
-			setPostition();
+			checkCollision(paddle.getHitbox());;
 	}
 
 	@Override

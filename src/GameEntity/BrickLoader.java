@@ -12,6 +12,7 @@ public class BrickLoader implements GameEntity {
 	private final int offset = 60;
 	private Ball ball;
 	public static int BrickCount = 48;
+	public static int Score = 0;
 
 	public BrickLoader(Ball ball) {
 		this.ball = ball;
@@ -28,10 +29,13 @@ public class BrickLoader implements GameEntity {
 		for (Brick[] row : bricks) {
 			for (Brick br : row) {
 				if (br.isAlive) {
-					ball.checkCollision((int) (ball.x + ball.dx), (int) (ball.y + ball.dy), br.getHitbox());
+					ball.checkCollision(br.getHitbox());
 					if (ball.isCollided()) {
-						br.setAlive(false);
-						BrickCount--;
+						boolean dead = br.setHit();
+						if (dead) {
+							BrickCount--;
+							Score += (int) br.getScore();
+						}
 					}
 				}
 			}
