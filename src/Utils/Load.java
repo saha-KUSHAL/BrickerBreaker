@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import Game.Game;
 
@@ -14,6 +17,7 @@ public class Load {
 	public static final String SettingsButton = "Settings.png";
 	public static final String Menubar = "MenuBar.png";
 	public static final String LevelButton = "Level.png";
+	
 	public static BufferedImage LoadImage(String file) {
 		BufferedImage img = null;
 		InputStream link = Load.class.getResourceAsStream("/" + file);
@@ -27,4 +31,6 @@ public class Load {
 		}
 		return img;
 	}
+	
+
 }
