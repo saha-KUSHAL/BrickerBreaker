@@ -2,6 +2,7 @@ package GameEntity;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
 public class BrickLoader implements GameEntity {
 
@@ -56,6 +57,18 @@ public class BrickLoader implements GameEntity {
 	public Rectangle getHitbox() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

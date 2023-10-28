@@ -1,7 +1,5 @@
 package Game;
 
-import java.sql.BatchUpdateException;
-
 public class Game implements Runnable {
 
 	public static int Width = 1080;

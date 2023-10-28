@@ -1,5 +1,7 @@
 package Game;
 
-public class GameState {
-	public static boolean playing, pause,exit, menu;
+public enum GameState {
+	MENU, PLAYING, SETTING, QUIT,LEVEL;
+	
+	public static GameState state = MENU;
 }

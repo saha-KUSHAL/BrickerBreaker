@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 
 public class Ball extends Entity implements GameEntity {
 
@@ -98,5 +99,17 @@ public class Ball extends Entity implements GameEntity {
 			Toolkit.getDefaultToolkit().sync(); // Flush the Linux graphics buffer
 		}
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

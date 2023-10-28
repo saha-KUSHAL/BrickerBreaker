@@ -3,6 +3,7 @@ package GameEntity;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class Brick extends Entity implements GameEntity {
@@ -62,6 +63,18 @@ public class Brick extends Entity implements GameEntity {
 	@Override
 	public Rectangle getHitbox() {
 		return new Rectangle((int) x, (int) y, width, hight);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
