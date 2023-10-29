@@ -44,7 +44,11 @@ public class Brick extends Entity implements GameEntity {
 	}
 
 	public double getScore() {
-		return Math.ceil(scoreHealth);
+		int randnum;
+		do {
+			randnum = random.nextInt(10);
+		}while(randnum == 0);
+		return Math.ceil(scoreHealth) * randnum;
 	}
 	@Override
 	public void update() {
