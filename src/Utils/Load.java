@@ -13,14 +13,16 @@ import Game.Game;
 
 public class Load {
 
-	public static final String PlayButton = "PlayButton.png";
-	public static final String SettingsButton = "Settings.png";
-	public static final String Menubar = "MenuBar.png";
-	public static final String LevelButton = "Level.png";
+	public static final String PlayButton = "/icons/PlayButton.png";
+	public static final String SettingsButton = "/icons/Settings.png";
+	public static final String Menubar = "/icons/MenuBar.png";
+	public static final String LevelButton = "/icons/Level.png";
+	
+	public static final String Level1 = "/levels/1.png";
 	
 	public static BufferedImage LoadImage(String file) {
 		BufferedImage img = null;
-		InputStream link = Load.class.getResourceAsStream("/" + file);
+		InputStream link = Load.class.getResourceAsStream(file);
 		try {
 			img = ImageIO.read(link); 
 		}catch(IOException e) {

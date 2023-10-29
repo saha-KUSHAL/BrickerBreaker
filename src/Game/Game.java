@@ -2,8 +2,13 @@ package Game;
 
 public class Game implements Runnable {
 
-	public static int Width = 1080;
-	public static int Hight = 720;
+	private final static short  defaultTileSize = 60;
+	private static float scale = 1.2f;
+	public final static short TileSize = (short) (defaultTileSize * scale);
+	private final static short col = 18;
+	private final static short row = 12; 
+	public static int Width = TileSize * col;
+	public static int Hight = TileSize * row;
 
 	private static final int UPS = 200;
 	private static final int FPS = 120;

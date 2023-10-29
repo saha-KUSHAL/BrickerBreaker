@@ -3,18 +3,17 @@ package GameEntity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import Utils.Audio;
 import Utils.Load;
 import Game.Game;
+import Level.LevelLoader;
 
 public class BrickLoader implements GameEntity {
 
-	private Brick[][] bricks;
-	private final int col = 16;
-	private final int row = 3;
-	private final int grid = 60;
-	private final int offset = 60;
+	private ArrayList<Brick> bricks;
+	private LevelLoader levelLoader;
 	private Ball ball;
 	private Audio brickImpactAudio;
 	public static int BrickCount = 48;
@@ -22,32 +21,29 @@ public class BrickLoader implements GameEntity {
 	
 	public BrickLoader(Ball ball) {
 		this.ball = ball;
+		levelLoader = new LevelLoader();
+		bricks = new ArrayList<>();
+		generateBricks();
 		brickImpactAudio = new Audio("res/paddleHit.wav");
-		bricks = new Brick[row][col];
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				bricks[i][j] = new Brick(j * grid + offset, i * grid + offset);
-			}
-		}
+//		generateBricks(Score, BrickCount, row, col)
 	}
 
 	@Override
 	public void update() {
-		for (Brick[] row : bricks) {
-			for (Brick br : row) {
+			for (Brick br : bricks) {
 				if (br.isAlive) {
 					ball.checkCollision(br.getHitbox());
 					if (ball.isCollided()) {
 						boolean dead = br.setHit();
-						brickImpactAudio.pause();
-						brickImpactAudio.setTime(0);
-						brickImpactAudio.play();
+//						brickImpactAudio.pause(); 
+//						brickImpactAudio.setTime(0);
+//						brickImpactAudio.play();
 						if(Game.debug)
 							System.out.println("Brick got hit");
 						if (dead) {
-							brickImpactAudio.pause(); 
-							brickImpactAudio.setTime(0);
-							brickImpactAudio.play();
+//							brickImpactAudio.pause(); 
+//							brickImpactAudio.setTime(0);
+//							brickImpactAudio.play();
 							BrickCount--;
 							Score += (int) br.getScore();
 							if(Game.debug)
@@ -56,15 +52,22 @@ public class BrickLoader implements GameEntity {
 					}
 				}
 			}
-		}
 	}
 
+	private void generateBricks() {
+		int level[][] = levelLoader.getBrickIndex(1);
+		
+		for (int i = 0; i < level.length; i++) {
+			for (int j = 0; j < level[0].length; j++) {
+				if(level[i][j] == 0)
+					bricks.add(new Brick(j * Game.TileSize, i * Game.TileSize));
+			} 
+		}
+	}
 	@Override
 	public void render(Graphics2D g) {
-		for (Brick[] row : bricks) {
-			for (Brick br : row) {
+		for (Brick br: bricks) {
 				br.render(g);
-			}
 		}
 
 	}
