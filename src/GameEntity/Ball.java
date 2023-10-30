@@ -14,14 +14,14 @@ public class Ball extends Entity implements GameEntity {
 	public static boolean isMouseClicked = false;
 	private Paddle paddle;
 
-	private boolean topLeft, topRight, bottomLeft, bottomRight;
+	private boolean topLeft, topRight, bottomLeft, bottomRight, isCollided;
 
 	public Ball(Paddle paddle) {
 		this.paddle = paddle;
 		hight = 20;
 		width = 20;
-		dx = 3.5;
-		dy = -1.2;
+		dx = 2 * Game.scale;
+		dy = -1 * Game.scale;
 		x = (Game.Width - width) / 2;
 		y = Game.Hight - 100;
 		isAlive = true;
@@ -36,34 +36,24 @@ public class Ball extends Entity implements GameEntity {
 		return isAlive;
 	}
 
-	protected void checkCollision(Rectangle r) {
-		// double tempX = x, tempY = y;
-		checkCorners((int) (x + dx), (int) y, r);
-
-		// If the ball is towards left
-		if (dx < 0)
-			if (bottomLeft || topLeft)
-				dx = -dx;
-
-		// If the ball is towards right
-		if (dx > 0)
-			if (topRight || bottomRight)
-				dx = -dx;
-
-		checkCorners((int) x, (int) (y + dy), r);
-
-		if (dy < 0)
-			if (topRight || topLeft)
-				dy = -dy;
-
-		if (dy > 0)
-			if (bottomLeft || bottomRight)
-				dy = -dy;
-
+	protected  void checkCollision(Rectangle r) {
+		int tempX = (int) (x + dx), tempY =(int)(y + dy);
+		boolean xColid = false, yColid = false;
+		checkCorners(tempX,(int) y,r);
+		if(topLeft || bottomRight || topRight || bottomRight) {
+			dx = - dx;
+			xColid = true;
+		}
+		checkCorners((int)x, tempY, r);
+		if(topLeft || bottomRight || topRight || bottomRight) {
+			dy = - dy;
+			yColid = true;
+		}
+		isCollided = xColid || yColid;
 	}
 
 	private void checkCorners(int x, int y, Rectangle r) {
-		topLeft = topRight = bottomLeft = bottomRight = false;
+		topLeft = topRight = bottomLeft = bottomRight = isCollided = false;
 		topLeft = r.contains(new Point(x, y));
 		bottomLeft = r.contains(new Point(x, y + hight));
 		topRight = r.contains(new Point(x + width, y));
@@ -71,7 +61,7 @@ public class Ball extends Entity implements GameEntity {
 	}
 
 	protected boolean isCollided() {
-		return (bottomLeft || bottomRight || topLeft || topRight);
+		return isCollided;
 	}
 
 	@Override
@@ -79,7 +69,7 @@ public class Ball extends Entity implements GameEntity {
 		if (isMouseClicked && isAlive) {
 			x += dx;
 			y += dy;
-			if (x <= 0 || x >= Game.Width - width)
+			if (x < 0 || x >= Game.Width - width)
 				dx = -dx;
 			if (y <= 0)
 				dy = -dy;

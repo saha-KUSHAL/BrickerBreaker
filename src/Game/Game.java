@@ -3,7 +3,7 @@ package Game;
 public class Game implements Runnable {
 
 	private final static short  defaultTileSize = 60;
-	private static float scale = 1.2f;
+	public static float scale = 1f;
 	public final static short TileSize = (short) (defaultTileSize * scale);
 	private final static short col = 18;
 	private final static short row = 12; 
