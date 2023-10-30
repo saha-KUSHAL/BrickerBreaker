@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import GameEntity.BrickLoader;
+import Level.LevelManager;
 
 public class Score {
 	private String score;
@@ -13,7 +14,7 @@ public class Score {
 	}
 	
 	public void update() {
-		score = "Score : " + BrickLoader.Score;
+		score = "Score : " + BrickLoader.Score + " Level: " + LevelManager.getLevel();
 	}
 	
 	public void render(Graphics2D g) {

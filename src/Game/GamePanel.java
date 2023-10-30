@@ -36,6 +36,10 @@ public class GamePanel extends JPanel {
 		case SETTING:
 			break;
 		case QUIT:
+		case LEVEL:
+			break;
+		default:
+			break;
 		}
 	}
 	public void paintComponent(Graphics g) {
@@ -51,6 +55,10 @@ public class GamePanel extends JPanel {
 		case SETTING:
 			break;
 		case QUIT:
+		case LEVEL:
+			break;
+		default:
+			break;
 		}
 			g.dispose();
 	}

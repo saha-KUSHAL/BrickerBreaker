@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
 import Game.Game;
 
 public class Load {
@@ -19,7 +15,10 @@ public class Load {
 	public static final String LevelButton = "/icons/Level.png";
 	
 	public static final String Level1 = "/levels/1.png";
-	
+	public static final String Level2 = "/levels/2.png";
+	public static final String Level3 = "/levels/3.png";
+	public static final String Level4 = "/levels/4.png";
+	public static final String Level5 = "/levels/5.png";
 	public static BufferedImage LoadImage(String file) {
 		BufferedImage img = null;
 		InputStream link = Load.class.getResourceAsStream(file);

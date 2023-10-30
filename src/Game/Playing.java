@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import GameEntity.Ball;
 import GameEntity.BrickLoader;
 import GameEntity.Paddle;
+import Level.LevelManager;
 import Utils.Score;
 
 public class Playing {
@@ -22,25 +23,26 @@ public class Playing {
 	}
 
 	public void update() {
-		if (ball.getAlive() && BrickLoader.BrickCount != 0) {
+
+		if (ball.getAlive()) {
+			brickLoader.update();
 			ball.update();
 			paddle.update();
-			brickLoader.update();
 			score.update();
 		}
 	}
-	
+
 	public void render(Graphics2D g) {
 		ball.render(g);
 		paddle.render(g);
 		brickLoader.render(g);
 		score.render(g);
 	}
-	
+
 	public void mouseClicked(MouseEvent e) {
 		paddle.mouseClicked(e);
 	}
-	
+
 	public void mouseMoved(MouseEvent e) {
 		paddle.mouseMoved(e);
 	}

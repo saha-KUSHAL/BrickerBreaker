@@ -24,7 +24,7 @@ public class Paddle extends Entity implements GameEntity{
 	
 	@Override
 	public void update() {
-		paddleX += ( mouseX - paddleX - width/2) * .05;
+		paddleX += ( mouseX - paddleX - width/2) * .1;
 		if( paddleX >= Game.Width - width)
 			paddleX = Game.Width -width;
 		if(paddleX <= 0)
