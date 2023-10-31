@@ -1,6 +1,7 @@
 package GameEntity;
 
 import Game.Game;
+import GameState.GameState;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -75,6 +76,7 @@ public class Ball extends Entity implements GameEntity {
 				dy = -dy;
 			if (y >= Game.Hight) {
 				isAlive = false;
+				GameState.state=GameState.LEVEL_FAILED;
 			}
 		}
 		if (isAlive)

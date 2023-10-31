@@ -1,4 +1,4 @@
-package Game;
+package GameState;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
