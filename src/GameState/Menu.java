@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import Game.Game;
 import Utils.Load;
 
-public class Menu {
+public class Menu extends GameStateItems {
 
 	/*
 	 * [0] - menubar [1] - playbutton [2] - setting [4] - level
@@ -22,8 +22,6 @@ public class Menu {
 	private final int LevelY = 606;
 	private final int SettingX = 723;
 	private final int SettingY = 607;
-	private Point mousePoint;
-	private boolean isMouseClicked;
 
 	public Menu() {
 		buttons = new BufferedImage[5];
@@ -37,13 +35,13 @@ public class Menu {
 
 	public void update() {
 		if (isMouseClicked) {
+			isMouseClicked = false;
 			if (getRect(1).contains(mousePoint))
 				GameState.state = GameState.PLAYING;
 			if (getRect(2).contains(mousePoint))
 				GameState.state = GameState.SETTING;
 			if (getRect(3).contains(mousePoint))
 				GameState.state = GameState.LEVEL;
-			isMouseClicked = false;
 		}
 	}
 
@@ -53,11 +51,6 @@ public class Menu {
 		g.drawImage(buttons[2], SettingX, SettingY, buttons[2].getWidth(), buttons[2].getHeight(), null);
 		g.drawImage(buttons[3], LevelX, LevelY, buttons[3].getWidth(), buttons[3].getHeight(), null);
 		g.drawImage(buttons[4],(int) (Game.Width - buttons[4].getWidth()) / 2, 0, buttons[4].getWidth(), buttons[4].getHeight(), null);
-	}
-
-	public void mouseClicked(MouseEvent e) {
-		isMouseClicked = true;
-		mousePoint = new Point(e.getX(), e.getY());
 	}
 
 	private Rectangle getRect(int index) {

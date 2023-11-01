@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import GameState.GameState;
 import GameState.Menu;
 import GameState.Playing;
+import GameState.PlayState;
 
 public class GamePanel extends JPanel {
 
@@ -18,12 +19,11 @@ public class GamePanel extends JPanel {
 	private MouseInput mouseInput;
 	private Menu menu;
 	private Playing playing;
-
 	public GamePanel() {
 		setPreferredSize(new Dimension(Game.Width, Game.Hight));
 		setDoubleBuffered(true);
 		setBackground(new Color(43, 60, 78));
-
+		setFocusable(true);
 		mouseInput = new MouseInput(this);
 		addMouseListener(mouseInput);
 		addMouseMotionListener(mouseInput);
@@ -36,16 +36,15 @@ public class GamePanel extends JPanel {
 		case MENU:
 			menu.update();
 			break;
-		case PLAYING:
+		case PLAYING:{
 			playing.update();
+		}
 			break;
 		case SETTING:
 			break;
 		case QUIT:
 		case LEVEL:
 			break;
-		case LEVEL_FAILED:
-			
 		default:
 			break;
 		}
@@ -81,4 +80,5 @@ public class GamePanel extends JPanel {
 	protected Playing getPlaying() {
 		return playing;
 	}
+	
 }

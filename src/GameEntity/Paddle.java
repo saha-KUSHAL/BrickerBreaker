@@ -45,9 +45,7 @@ public class Paddle extends Entity implements GameEntity{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Ball.isMouseClicked = true;
-		if(Game.debug)
-			System.out.println("Mouse clicked: Paddle|" + LocalTime.now());
+
 	}
 
 	@Override

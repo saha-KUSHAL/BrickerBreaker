@@ -2,6 +2,7 @@ package GameState;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.lang.System.Logger.Level;
 
 import GameEntity.Ball;
 import GameEntity.BrickLoader;
@@ -14,33 +15,61 @@ public class Playing {
 	private Paddle paddle;
 	private BrickLoader brickLoader;
 	private Score score;
-
+	private LevelFailed levelFailed;
 	public Playing() {
 		paddle = new Paddle();
 		ball = new Ball(paddle);
 		brickLoader = new BrickLoader(ball);
 		score = new Score();
+		levelFailed = new LevelFailed();
 	}
 
 	public void update() {
-
-		if (ball.getAlive()) {
+		switch (PlayState.state) {
+		case Playing:
 			brickLoader.update();
 			ball.update();
 			paddle.update();
 			score.update();
+			if(!Ball.getALive())
+				PlayState.state = PlayState.Failed;
+			break;
+		case Failed:
+			levelFailed.update();
+			break;
+		case Retry:
 		}
+
 	}
 
 	public void render(Graphics2D g) {
-		ball.render(g);
-		paddle.render(g);
-		brickLoader.render(g);
-		score.render(g);
+		switch (PlayState.state) {
+		case Playing:
+			brickLoader.render(g);
+			ball.render(g);
+			paddle.render(g);
+			score.render(g);
+			break;
+		case Failed:
+			levelFailed.render(g);
+			break;
+		case Retry:
+		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		paddle.mouseClicked(e);
+		switch (PlayState.state) {
+		case Playing:
+			ball.mouseClicked(e);
+			break;
+		case Failed:
+			levelFailed.mouseClicked(e);
+			break;
+		case Retry:
+			break;
+		default:
+			break;
+		}
 	}
 
 	public void mouseMoved(MouseEvent e) {

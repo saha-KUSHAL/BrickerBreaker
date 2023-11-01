@@ -14,7 +14,9 @@ public class Ball extends Entity implements GameEntity {
 
 	public static boolean isMouseClicked = false;
 	private Paddle paddle;
-
+	private static int hight,width;
+	private static double dx,dy,x,y;
+	private static boolean isAlive;
 	private boolean topLeft, topRight, bottomLeft, bottomRight, isCollided;
 
 	public Ball(Paddle paddle) {
@@ -32,9 +34,6 @@ public class Ball extends Entity implements GameEntity {
 	public Rectangle getHitbox() {
 
 		return new Rectangle((int) x, (int) y, width, hight);
-	}
-	public boolean getAlive() {
-		return isAlive;
 	}
 
 	protected  void checkCollision(Rectangle r) {
@@ -74,10 +73,8 @@ public class Ball extends Entity implements GameEntity {
 				dx = -dx;
 			if (y <= 0)
 				dy = -dy;
-			if (y >= Game.Hight) {
+			if (y > Game.Hight)
 				isAlive = false;
-				GameState.state=GameState.LEVEL_FAILED;
-			}
 		}
 		if (isAlive)
 			checkCollision(paddle.getHitbox());;
@@ -92,10 +89,22 @@ public class Ball extends Entity implements GameEntity {
 		}
 
 	}
-
+	
+	public static void reset() {
+		dx = 2 * Game.scale;
+		dy = -1 * Game.scale;
+		x = (Game.Width - width) / 2;
+		y = Game.Hight - 100;
+		isAlive = true;
+		isMouseClicked = false;
+	}
+	
+	public static boolean getALive() {
+		return isAlive;
+	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		isMouseClicked = true;
 		
 	}
 
