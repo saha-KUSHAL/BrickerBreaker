@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import Utils.Load;
 import Game.Game;
 import GameEntity.Ball;
+import GameEntity.BrickLoader;
+import GameEntity.Paddle;
 
 public class LevelFailed {
 
@@ -32,10 +34,6 @@ public class LevelFailed {
 		if (isMouseClicked) {
 			if (getRect(homeButton, homeButtonX, homeButtonY).contains(mousePoint)) {
 				GameState.state = GameState.MENU;
-				/*
-				 * ToDo a reset method for all necessary classes so that retry and home state
-				 * executes independently;
-				 */
 				reset();
 			}
 			// if (getRect(retry, retryButtonX, retryButtonY).contains(mousePoint))
@@ -64,6 +62,8 @@ public class LevelFailed {
 	private void reset() {
 		Ball.reset();
 		isMouseClicked = false;
+		BrickLoader.reset();
+		Paddle.reset();
 		PlayState.state = PlayState.Playing;
 	}
 }

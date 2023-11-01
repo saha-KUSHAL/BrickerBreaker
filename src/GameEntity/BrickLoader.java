@@ -12,8 +12,8 @@ import Utils.Audio;
 
 public class BrickLoader implements GameEntity {
 
-	private ArrayList<Brick> bricks;
-	private LevelLoader levelLoader;
+	private static ArrayList<Brick> bricks;
+	private static LevelLoader levelLoader;
 	private Ball ball;
 	@SuppressWarnings("unused")
 	private Audio brickImpactAudio;
@@ -55,13 +55,9 @@ public class BrickLoader implements GameEntity {
 				}
 			}
 		}
-		else {
-			LevelManager.setLevel(LevelManager.currentLevel++);
-			generateBricks();
-		}
 	}
 
-	private void generateBricks() {
+	private static void generateBricks() {
 		int level[][] = levelLoader.getBrickIndex(LevelManager.getLevel());
 
 		for (int i = 0; i < level.length; i++) {
@@ -78,7 +74,13 @@ public class BrickLoader implements GameEntity {
 		for (Brick br : bricks) {
 			br.render(g);
 		}
-
+	}
+	
+	public static void reset() {
+		bricks.clear();
+		BrickCount=0;
+		Score=0;
+		generateBricks();
 	}
 
 	@Override
