@@ -14,5 +14,6 @@ public class GameWindow extends JFrame {
 		add(gamePanel);
 		pack();
 		setVisible(true);
+		setResizable(false);
 	}
 }

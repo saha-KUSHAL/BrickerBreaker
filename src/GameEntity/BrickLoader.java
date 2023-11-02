@@ -72,15 +72,17 @@ public class BrickLoader implements GameEntity {
 
 	@Override
 	public void render(Graphics2D g) {
-		for (Brick br : bricks) {
-			br.render(g);
+		if (Ball.getALive()) {
+			for (Brick br : bricks) {
+				br.render(g);
+			}
 		}
 	}
-	
+
 	public static void reset() {
 		bricks.clear();
-		BrickCount=0;
-		Score=0;
+		BrickCount = 0;
+		Score = 0;
 		generateBricks();
 	}
 
