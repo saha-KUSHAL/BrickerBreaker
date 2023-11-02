@@ -36,8 +36,10 @@ public class LevelFailed {
 				GameState.state = GameState.MENU;
 				reset();
 			}
-			// if (getRect(retry, retryButtonX, retryButtonY).contains(mousePoint))
-			// GameState.state = GameState.state; // ToDO
+			if (getRect(retry, retryButtonX, retryButtonY).contains(mousePoint)) {
+				PlayState.state = PlayState.Playing;
+				reset();
+			}
 		}
 
 	}

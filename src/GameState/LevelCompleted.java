@@ -54,8 +54,8 @@ public class LevelCompleted {
 			if (getRect(homeButton, homeButtonX, homeButtonY).contains(mousePoint)) {
 				LevelManager.incrementLevel();
 				GameState.state = GameState.MENU;
-				reset();
 				PlayState.state = PlayState.Playing;
+				reset();
 			}
 		}
 	}
