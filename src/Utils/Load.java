@@ -25,6 +25,8 @@ public class Load {
 	
 	public static final String LevelFailed = "/icons/LevelFailed.png";
 	public static final String Retry = "/icons/Retry.png";
+	public static final String LevelCompleted = "/icons/LevelCompleted.png";
+	public static final String NextLevel = "/icons/NextLevel.png";
 	
 	public static BufferedImage LoadImage(String file) {
 		BufferedImage img = null;

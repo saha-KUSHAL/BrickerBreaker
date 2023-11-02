@@ -60,8 +60,8 @@ public class LevelFailed {
 	}
 
 	private void reset() {
-		Ball.reset();
 		isMouseClicked = false;
+		Ball.reset();
 		BrickLoader.reset();
 		Paddle.reset();
 		PlayState.state = PlayState.Playing;

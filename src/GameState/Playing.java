@@ -16,12 +16,14 @@ public class Playing {
 	private BrickLoader brickLoader;
 	private Score score;
 	private LevelFailed levelFailed;
+	private LevelCompleted levelCompleted;
 	public Playing() {
 		paddle = new Paddle();
 		ball = new Ball(paddle);
 		brickLoader = new BrickLoader(ball);
 		score = new Score();
 		levelFailed = new LevelFailed();
+		levelCompleted = new LevelCompleted();
 	}
 
 	public void update() {
@@ -33,11 +35,19 @@ public class Playing {
 			score.update();
 			if(!Ball.getALive())
 				PlayState.state = PlayState.Failed;
+			if(brickLoader.BrickCount == 0) {
+				PlayState.state= PlayState.Completed;
+			}
 			break;
 		case Failed:
 			levelFailed.update();
 			break;
 		case Retry:
+		case Completed:
+			levelCompleted.update();
+			break;
+		default:
+			break;
 		}
 
 	}
@@ -54,6 +64,11 @@ public class Playing {
 			levelFailed.render(g);
 			break;
 		case Retry:
+		case Completed:
+			levelCompleted.render(g);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -67,6 +82,8 @@ public class Playing {
 			break;
 		case Retry:
 			break;
+		case Completed:
+			levelCompleted.mouseClicked(e);
 		default:
 			break;
 		}

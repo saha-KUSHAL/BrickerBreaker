@@ -55,6 +55,7 @@ public class BrickLoader implements GameEntity {
 				}
 			}
 		}
+
 	}
 
 	private static void generateBricks() {
