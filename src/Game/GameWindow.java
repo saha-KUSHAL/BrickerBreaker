@@ -8,11 +8,11 @@ public class GameWindow extends JFrame {
 
 	public GameWindow(GamePanel gamePanel) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setTitle("Bricker Breaker");
+		setTitle("Brick Breaker");
 		requestFocus();
 		add(gamePanel);
 		pack();
+		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
 	}

@@ -1,8 +1,6 @@
 package GameEntity;
 
 import Game.Game;
-import GameState.GameState;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -40,12 +38,12 @@ public class Ball extends Entity implements GameEntity {
 		int tempX = (int) (x + dx), tempY =(int)(y + dy);
 		boolean xColid = false, yColid = false;
 		checkCorners(tempX,(int) y,r);
-		if(topLeft || bottomRight || topRight || bottomRight) {
+		if(topLeft || bottomRight || topRight || bottomLeft) {
 			dx = - dx;
 			xColid = true;
 		}
 		checkCorners((int)x, tempY, r);
-		if(topLeft || bottomRight || topRight || bottomRight) {
+		if(topLeft || bottomRight || topRight || bottomLeft) {
 			dy = - dy;
 			yColid = true;
 		}

@@ -3,7 +3,6 @@ package Utils;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.invoke.StringConcatFactory;
 
 import javax.imageio.ImageIO;
 import Game.Game;
@@ -28,6 +27,12 @@ public class Load {
 	public static final String LevelCompleted = "/icons/LevelCompleted.png";
 	public static final String NextLevel = "/icons/NextLevel.png";
 	
+	public static final String LevelCompletedBg = "/icons/LevelCompletedBg.png";
+	public static final String LevelText = "/icons/LevelText.png";
+	public static final String LevelIncompletedBg = "/icons/LevelIncompletedBg.png";
+	public static final String BackButton = "/icons/BackButton.png";
+	//public static final String FontAltRivira = "/ALTRiviera-Regular.otf";
+	
 	public static BufferedImage LoadImage(String file) {
 		BufferedImage img = null;
 		InputStream link = Load.class.getResourceAsStream(file);
@@ -41,5 +46,9 @@ public class Load {
 		}
 		return img;
 	}
+	
+	//public static InputStream LoadFont(String font) {
+		
+	//}
 
 }

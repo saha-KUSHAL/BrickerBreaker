@@ -2,12 +2,9 @@ package GameState;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.lang.System.Logger.Level;
-
 import GameEntity.Ball;
 import GameEntity.BrickLoader;
 import GameEntity.Paddle;
-import Level.LevelManager;
 import Utils.Score;
 
 public class Playing {
@@ -35,7 +32,7 @@ public class Playing {
 			score.update();
 			if(!Ball.getALive())
 				PlayState.state = PlayState.Failed;
-			if(brickLoader.BrickCount == 0) {
+			if(BrickLoader.BrickCount == 0) {
 				PlayState.state= PlayState.Completed;
 			}
 			break;

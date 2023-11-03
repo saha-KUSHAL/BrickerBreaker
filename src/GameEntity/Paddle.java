@@ -6,13 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
-import java.time.LocalTime;
 
 public class Paddle extends Entity implements GameEntity {
 	private static double paddleX, mouseX, y;
 	private static int width;
-	private static boolean isAlive;
-
 	public Paddle() {
 		hight = 15;
 		width = 100;
@@ -21,7 +18,6 @@ public class Paddle extends Entity implements GameEntity {
 		paddleX = (Game.Width - width) / 2;
 		mouseX = paddleX;
 		y = Game.Hight - 80;
-		isAlive = true;
 	}
 
 	@Override
@@ -44,7 +40,6 @@ public class Paddle extends Entity implements GameEntity {
 		paddleX = (Game.Width - width) / 2;
 		mouseX = paddleX;
 		y = Game.Hight - 80;
-		isAlive = true;
 	}
 
 	@Override

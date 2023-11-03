@@ -9,9 +9,9 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 import GameState.GameState;
+import GameState.Level;
 import GameState.Menu;
 import GameState.Playing;
-import GameState.PlayState;
 
 public class GamePanel extends JPanel {
 
@@ -19,6 +19,7 @@ public class GamePanel extends JPanel {
 	private MouseInput mouseInput;
 	private Menu menu;
 	private Playing playing;
+	private Level level;
 	public GamePanel() {
 		setPreferredSize(new Dimension(Game.Width, Game.Hight));
 		setDoubleBuffered(true);
@@ -29,6 +30,7 @@ public class GamePanel extends JPanel {
 		addMouseMotionListener(mouseInput);
 		menu = new Menu();
 		playing = new Playing();
+		level = new Level();
 	}
 
 	protected void update() {
@@ -44,6 +46,7 @@ public class GamePanel extends JPanel {
 			break;
 		case QUIT:
 		case LEVEL:
+			level.update();
 			break;
 		default:
 			break;
@@ -66,6 +69,7 @@ public class GamePanel extends JPanel {
 			break;
 		case QUIT:
 		case LEVEL:
+			level.render(g2);
 			break;
 		default:
 			break;
@@ -79,6 +83,9 @@ public class GamePanel extends JPanel {
 
 	protected Playing getPlaying() {
 		return playing;
+	}
+	protected Level getLevel() {
+		return level;
 	}
 	
 }
