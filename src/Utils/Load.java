@@ -31,6 +31,7 @@ public class Load {
 	public static final String LevelText = "/icons/LevelText.png";
 	public static final String LevelIncompletedBg = "/icons/LevelIncompletedBg.png";
 	public static final String BackButton = "/icons/BackButton.png";
+	public static final String LevelIndicator = "/icons/LevelIndicator.png";
 	//public static final String FontAltRivira = "/ALTRiviera-Regular.otf";
 	
 	public static BufferedImage LoadImage(String file) {
