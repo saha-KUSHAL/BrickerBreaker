@@ -9,7 +9,7 @@ import Game.Game;
 
 public class Load {
 
-	public static final String PlayButton = "/icons/PlayButton.png";
+	public static final String PlayButton = "/icons/PlayButtons.png";
 	public static final String SettingsButton = "/icons/Settings.png";
 	public static final String Menubar = "/icons/MenuBar.png";
 	public static final String LevelButton = "/icons/Level.png";

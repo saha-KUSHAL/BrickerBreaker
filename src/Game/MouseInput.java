@@ -24,6 +24,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		switch (GameState.state) {
 		case MENU:
+			gamePanel.getMenu().mouseMoved(e);
 			break;
 		case PLAYING:
 			gamePanel.getPlaying().mouseMoved(e);
@@ -60,26 +61,23 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseEntered(MouseEvent e) {
 
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseExited(MouseEvent e) {
 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void mousePressed(MouseEvent e) {
+		gamePanel.getMenu().mousePressed(e);
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseReleased(MouseEvent e) {
+		gamePanel.getMenu().mouseReleased(e);
 
 	}
 

@@ -100,11 +100,11 @@ public class Playing {
 
 	public void mouseClicked(MouseEvent e) {
 		mousePoint = e.getPoint();
-		if (getRect(pauseAndContinueButton[0],buttonX,buttonY).contains(mousePoint))
-			PlayState.state = PlayState.Paused;
 		switch (PlayState.state) {
 		case Playing: {
 			ball.mouseClicked(e);
+			if (getRect(pauseAndContinueButton[0],buttonX,buttonY).contains(mousePoint))
+				PlayState.state = PlayState.Paused;
 			break;
 		}
 		case Failed:

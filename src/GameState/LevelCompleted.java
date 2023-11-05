@@ -42,6 +42,7 @@ public class LevelCompleted {
 		isMouseClicked = false;
 		BrickLoader.reset();
 		Paddle.reset();
+		Menu.resetBooleans();
 	}
 
 	public void update() {
@@ -53,8 +54,8 @@ public class LevelCompleted {
 			}
 			if (getRect(homeButton, homeButtonX, homeButtonY).contains(mousePoint)) {
 				LevelManager.incrementLevel();
-				GameState.state = GameState.MENU;
 				PlayState.state = PlayState.Playing;
+				GameState.state = GameState.MENU;
 				reset();
 			}
 		}

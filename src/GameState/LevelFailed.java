@@ -33,6 +33,7 @@ public class LevelFailed {
 	public void update() {
 		if (isMouseClicked) {
 			if (getRect(homeButton, homeButtonX, homeButtonY).contains(mousePoint)) {
+				PlayState.state = PlayState.Playing;
 				GameState.state = GameState.MENU;
 				reset();
 			}
@@ -66,6 +67,6 @@ public class LevelFailed {
 		Ball.reset();
 		BrickLoader.reset();
 		Paddle.reset();
-		PlayState.state = PlayState.Playing;
+		Menu.resetBooleans();
 	}
 }

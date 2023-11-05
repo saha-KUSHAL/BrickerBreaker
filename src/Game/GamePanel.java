@@ -44,10 +44,10 @@ public class GamePanel extends JPanel {
 			break;
 		case SETTING:
 			break;
-		case QUIT:
 		case LEVEL:
 			level.update();
 			break;
+		case QUIT:
 		default:
 			break;
 		}

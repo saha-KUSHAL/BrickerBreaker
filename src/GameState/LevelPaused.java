@@ -34,6 +34,7 @@ public class LevelPaused {
 				reset();
 				PlayState.state = PlayState.Playing;
 				GameState.state = GameState.MENU;
+				Menu.resetBooleans();
 			}
 		}
 	}
