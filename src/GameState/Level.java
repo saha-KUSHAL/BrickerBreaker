@@ -25,7 +25,7 @@ public class Level extends GameStateItems {
 	public Level() {
 		comFontColor = new Color(255, 247, 214);
 		inComFontColor = new Color(54, 75, 94);
-		customFont = new Font("ALT Riviera", Font.PLAIN, 84);
+		customFont = new Font("Titan One", Font.PLAIN, 84);
 		clickedLevel=0;
 		text = Load.LoadImage(Load.LevelText);
 		textX = (Game.Width - text.getWidth()) / 2;

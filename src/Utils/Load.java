@@ -27,11 +27,13 @@ public class Load {
 	public static final String LevelCompleted = "/icons/LevelCompleted.png";
 	public static final String NextLevel = "/icons/NextLevel.png";
 	
-	public static final String LevelCompletedBg = "/icons/LevelCompletedBg.png";
+	public static final String LevelCompletedBg = "/bg/LevelCompletedBg.png";
 	public static final String LevelText = "/icons/LevelText.png";
-	public static final String LevelIncompletedBg = "/icons/LevelIncompletedBg.png";
+	public static final String LevelIncompletedBg = "/bg/LevelIncompletedBg.png";
 	public static final String BackButton = "/icons/BackButton.png";
 	public static final String LevelIndicator = "/icons/LevelIndicator.png";
+	public static final String ScoreBg = "/bg/ScoreBg.png";
+	public static final String LevelTextBg = "/bg/LevelTextBg.png";
 	//public static final String FontAltRivira = "/ALTRiviera-Regular.otf";
 	
 	public static BufferedImage LoadImage(String file) {
