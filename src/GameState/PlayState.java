@@ -1,7 +1,7 @@
 package GameState;
 
 public enum PlayState {
-	Playing, Failed, Retry, Completed;
+	Playing, Failed,Completed,Paused;
 
 	public static PlayState state = Playing;
 }

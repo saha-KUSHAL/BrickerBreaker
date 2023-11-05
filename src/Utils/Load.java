@@ -34,6 +34,12 @@ public class Load {
 	public static final String LevelIndicator = "/icons/LevelIndicator.png";
 	public static final String ScoreBg = "/bg/ScoreBg.png";
 	public static final String LevelTextBg = "/bg/LevelTextBg.png";
+	public static final String PausedBg = "/bg/PausedBg.png";
+	public static final String ResumeButton = "/icons/Resume.png";
+	public static final String ExitButton = "/icons/Exit.png";
+	public static final String PausedText = "/icons/PausedText.png";
+	public static final String PauseIcon = "/icons/PauseIcon.png";
+	public static final String ContinueIcon = "/icons/ContinueIcon.png";
 	//public static final String FontAltRivira = "/ALTRiviera-Regular.otf";
 	
 	public static BufferedImage LoadImage(String file) {
