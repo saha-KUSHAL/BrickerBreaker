@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import GameEntity.BrickLoader;
-import Level.LevelManager;
 
 public class Score {
 	private String score;

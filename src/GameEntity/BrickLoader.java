@@ -8,15 +8,12 @@ import java.util.ArrayList;
 import Game.Game;
 import Level.LevelLoader;
 import Level.LevelManager;
-import Utils.Audio;
 
 public class BrickLoader implements GameEntity {
 
 	private static ArrayList<Brick> bricks;
 	private static LevelLoader levelLoader;
 	private Ball ball;
-	@SuppressWarnings("unused")
-	private Audio brickImpactAudio;
 	public static int BrickCount = 0;
 	public static int Score = 0;
 
@@ -25,8 +22,6 @@ public class BrickLoader implements GameEntity {
 		levelLoader = new LevelLoader();
 		bricks = new ArrayList<>();
 		generateBricks();
-		brickImpactAudio = new Audio("res/paddleHit.wav");
-//		generateBricks(Score, BrickCount, row, col)
 	}
 
 	@Override
@@ -37,15 +32,9 @@ public class BrickLoader implements GameEntity {
 					ball.checkCollision(br.getHitbox());
 					if (ball.isCollided()) {
 						boolean dead = br.setHit();
-//						brickImpactAudio.pause();
-//						brickImpactAudio.setTime(0);
-//						brickImpactAudio.play();
 						if (Game.debug)
 							System.out.println("Brick got hit");
 						if (dead) {
-//							brickImpactAudio.pause();
-//							brickImpactAudio.setTime(0);
-//							brickImpactAudio.play();
 							BrickCount--;
 							Score += (int) br.getScore();
 							if (Game.debug)
