@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Brick Breaker
+GenericName=A Java Game
+Comment=A Break Breakout Like Game
+
+Exec=java -jar $HOME/BrickBreaker/BrickerBreaker.jar
+Icon=/home/kushal/BrickBreaker/Logo.svg
+Terminal=false
+
+Type=Application
+Categories=Games;Application
