@@ -16,8 +16,7 @@ public class BrickLoader implements GameEntity {
     private static LevelLoader levelLoader;
     private Ball ball;
 
-    public BrickLoader(Ball ball) {
-        this.ball = ball;
+    public BrickLoader() {
         levelLoader = new LevelLoader();
         bricks = new ArrayList<>();
         generateBricks();
@@ -42,26 +41,29 @@ public class BrickLoader implements GameEntity {
         generateBricks();
     }
 
-    @Override
+    public static ArrayList<Brick> getBricks() {
+        return bricks;
+    }
+        @Override
     public void update() {
-        if (BrickCount != 0) {
-            for (Brick br : bricks) {
-                if (br.isAlive) {
-                    ball.checkCollision(br.getHitbox());
-                    if (ball.isCollided()) {
-                        boolean dead = br.setHit();
-                        if (Game.debug)
-                            System.out.println("Brick got hit");
-                        if (dead) {
-                            BrickCount--;
-                            Score += (int) br.getScore();
-                            if (Game.debug)
-                                System.out.println("Brick got destroyed | Score: " + Score);
-                        }
-                    }
-                }
-            }
-        }
+//        if (BrickCount != 0) {
+//            for (Brick br : bricks) {
+//                if (br.isAlive) {
+//                    ball.checkCollision(br.getHitbox());
+//                    if (ball.isCollided()) {
+//                        boolean dead = br.setHit();
+//                        if (Game.debug)
+//                            System.out.println("Brick got hit");
+//                        if (dead) {
+//                            BrickCount--;
+//                            Score += (int) br.getScore();
+//                            if (Game.debug)
+//                                System.out.println("Brick got destroyed | Score: " + Score);
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
     }
 
@@ -69,6 +71,7 @@ public class BrickLoader implements GameEntity {
     public void render(Graphics2D g) {
         if (Ball.getALive()) {
             for (Brick br : bricks) {
+
                 br.render(g);
             }
         }

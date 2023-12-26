@@ -31,14 +31,12 @@ public class Brick extends Entity implements GameEntity {
         color[4] = new Color(117, 197, 172); // Cyan
     }
 
-    public boolean setHit() {
+    public void setHit() {
         health--;
         brickColor = new Color(73, 91, 100);
         if (health <= 0) {
             isAlive = false;
-            return true;
         }
-        return false;
     }
 
     public double getScore() {

@@ -9,26 +9,28 @@ public class Ball extends Entity implements GameEntity {
 
     public static boolean isMouseClicked = false;
     private static int hight, width;
-    private static double dx, dy, x, y;
+    private static int dx;
+    private static int dy;
+    private static int x;
+    private static int y;
+    private static int xTemp;
+    private static int yTemp;
     private static boolean isAlive;
-    private Paddle paddle;
-    private boolean topLeft, topRight, bottomLeft, bottomRight, isCollided;
-    private double xTemp, yTemp;
+    private boolean topLeft, topRight, bottomLeft, bottomRight;
 
-    public Ball(Paddle paddle) {
-        this.paddle = paddle;
-        hight = 20;
-        width = 20;
-        dx = 2 * Game.scale;
-        dy = -1 * Game.scale;
+    public Ball() {
+        hight = 15;
+        width = 15;
+        dx = (int) (2 * Game.scale);
+        dy = (int) (-1 * Game.scale);
         x = (Game.Width - width) / 2;
         y = Game.Hight - 100;
         isAlive = true;
     }
 
     public static void reset() {
-        dx = 2 * Game.scale;
-        dy = -1 * Game.scale;
+        dx = (int) (2 * Game.scale);
+        dy = (int) (-1 * Game.scale);
         x = (Game.Width - width) / 2;
         y = Game.Hight - 100;
         isAlive = true;
@@ -52,68 +54,67 @@ public class Ball extends Entity implements GameEntity {
         y = yTemp;
     }
 
-    protected void checkCollision(Rectangle r) {
-        isCollided = false;
-        double xDest = x + dx;
-        double yDest = y + dy;
+    public Boolean checkCollision(Rectangle r) {
+        boolean isCollided = false;
+        int xDest = x + dx;
+        int yDest = y + dy;
         xTemp = x;
         yTemp = y;
+
         //  Checking  horizontal collision
-        checkCorners((int) xDest, (int) y, r);
+        checkCorners(xDest, y, r);
 
         // Traveling right
         if (dx > 0 && (topRight || bottomRight)) {
             dx = -dx;
             isCollided = true;
-            xTemp = r.getMinX() - width - 1;
+            xTemp = (int) r.getMinX() - width - 1;
         }
         //Traveling left
         if (dx < 0 && (topLeft && bottomLeft)) {
             dx = -dx;
             isCollided = true;
-            xTemp = r.getMaxX() + 1;
+            xTemp = (int) r.getMaxX() + 1;
         }
 
         //Checking Vertical Collison
-        checkCorners((int) x, (int) yDest, r);
+        checkCorners(x, yDest, r);
 
         // Traveling to bottom
         if (dy > 0 && (bottomRight || bottomLeft)) {
             dy = -dy;
             isCollided = true;
-            yTemp = r.getMinY() - hight - 1;
+            yTemp = (int) r.getMinY() - hight - 1;
+            System.out.printf("BottomRight, BottomLeft, yTemp = %d\n",yTemp);
         }
         //Traveling to top
         if (dy < 0 && (topLeft || topRight)) {
             dy = -dy;
             isCollided = true;
-            yTemp = r.getMaxX() + 1;
+            yTemp = (int) r.getMaxY() + 1;
+            System.out.printf("TopRight, TopLeft, yTemp = %d\n",yTemp);
         }
+        return isCollided;
     }
 
     private void checkCorners(int x, int y, Rectangle r) {
-        topLeft = topRight = bottomLeft = bottomRight = isCollided = false;
+        topLeft = topRight = bottomLeft = bottomRight = false;
         topLeft = r.contains(new Point(x, y));
         bottomLeft = r.contains(new Point(x, y + hight));
         topRight = r.contains(new Point(x + width, y));
         bottomRight = r.contains(new Point(x + width, y + hight));
     }
 
-    protected boolean isCollided() {
-        return isCollided;
-    }
 
     @Override
     public void update() {
-        if (isMouseClicked && isAlive) {
-            if (x < 0 || x >= Game.Width - width)
+        if (isAlive) {
+            if (x <= 0 || x >= Game.Width - width)
                 dx = -dx;
             if (y <= 0)
                 dy = -dy;
             if (y > Game.Hight)
                 isAlive = false;
-            checkCollision(paddle.getHitbox());
-            setPoition();
         }
     }
 

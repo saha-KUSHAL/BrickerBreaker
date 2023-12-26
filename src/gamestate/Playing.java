@@ -2,6 +2,7 @@ package gamestate;
 
 import game.Game;
 import gameentity.Ball;
+import gameentity.Brick;
 import gameentity.BrickLoader;
 import gameentity.Paddle;
 import utils.Load;
@@ -10,6 +11,7 @@ import utils.Score;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Playing {
     private Ball ball;
@@ -25,8 +27,8 @@ public class Playing {
 
     public Playing() {
         paddle = new Paddle();
-        ball = new Ball(paddle);
-        brickLoader = new BrickLoader(ball);
+        brickLoader = new BrickLoader();
+        ball = new Ball();
         score = new Score();
         levelFailed = new LevelFailed();
         levelCompleted = new LevelCompleted();
@@ -41,9 +43,10 @@ public class Playing {
     public void update() {
         switch (PlayState.state) {
             case Playing:
-                brickLoader.update();
-                ball.update();
                 paddle.update();
+                checkCollision();
+                ball.setPoition();
+                ball.update();
                 score.update();
                 if (!Ball.getALive())
                     PlayState.state = PlayState.Failed;
@@ -125,5 +128,25 @@ public class Playing {
 
     private Rectangle getRect(BufferedImage image, int x, int y) {
         return new Rectangle(x, y, image.getWidth(), image.getHeight());
+    }
+
+    private void checkCollision() {
+        ball.checkCollision(paddle.getHitbox());
+        ArrayList<Brick> brickArrayList = BrickLoader.getBricks();
+
+        for (Brick br : brickArrayList) {
+            if(br.isAlive) {
+                // Check if the ball is collied with a brick
+                if (ball.checkCollision(br.getHitbox())) {
+                    br.setHit();
+
+                    // If the brick is fully destroyed
+                    if (!br.isAlive) {
+                        BrickLoader.BrickCount--;
+                        BrickLoader.Score += br.getScore();
+                    }
+                }
+            }
+        }
     }
 }
