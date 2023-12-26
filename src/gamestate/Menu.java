@@ -67,17 +67,20 @@ public class Menu extends GameStateItems {
             g.drawImage(playButton.getSubimage(245, 0, playButton.getWidth() / 3, playButton.getHeight()), playButtonX,
                     playButtonY, playButton.getWidth() / 3, playButton.getHeight(), null);
 
-        if (mousePressed)
+        if (mousePressed) {
             g.drawImage(playButton.getSubimage(490, 0, playButton.getWidth() / 3, playButton.getHeight()), playButtonX,
                     playButtonY, playButton.getWidth() / 3, playButton.getHeight(), null);
+        }
     }
 
     private Rectangle getRect(int index) {
+        int decreseHb = 50;
         return switch (index) {
             case 0 -> new Rectangle(MenuBarX, MenuBarY, buttons[index].getWidth(), buttons[index].getHeight());
             case 1 -> new Rectangle(SettingX, SettingY, buttons[index].getWidth(), buttons[index].getHeight());
             case 2 -> new Rectangle(LevelX, LevelY, buttons[index].getWidth(), buttons[index].getHeight());
-            case 3 -> new Rectangle(playButtonX, playButtonY, playButton.getWidth() / 3, playButton.getHeight());
+            case 3 -> new Rectangle(playButtonX + decreseHb, playButtonY + decreseHb ,
+                    playButton.getWidth() / 3 - (decreseHb * 2), playButton.getHeight() - (decreseHb * 2) );
             default -> null;
         };
     }
