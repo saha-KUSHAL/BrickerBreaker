@@ -107,7 +107,7 @@ public class Playing {
         switch (PlayState.state) {
             case Playing: {
                 ball.mouseClicked(e);
-                if (getRect(pauseAndContinueButton[0], buttonX, buttonY).contains(mousePoint))
+                if (getRect(pauseAndContinueButton[0], buttonX , buttonY,20).contains(mousePoint))
                     PlayState.state = PlayState.Paused;
                 break;
             }
@@ -131,6 +131,10 @@ public class Playing {
 
     private Rectangle getRect(BufferedImage image, int x, int y) {
         return new Rectangle(x, y, image.getWidth(), image.getHeight());
+    }
+    private Rectangle getRect(BufferedImage image, int x, int y, int increaseHitBox) {
+        return new Rectangle(x-increaseHitBox, y - increaseHitBox,
+                image.getWidth() + (increaseHitBox*2), image.getHeight() + (increaseHitBox * 2));
     }
 
     private void checkCollision() {

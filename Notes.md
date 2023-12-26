@@ -1,8 +1,8 @@
 # Bugs to Be Fixed
 - [x] Paddle Collision 
-- [ ] Hit Box increase of pause button 
+- [x] Hit Box increase of pause button 
 - [x] HitBox decrease of Play Button 
-- [ ] Level are getting set to lower through levels page.
+- [x] Level are getting set to lower through levels page.
 # Features
 - [ ] Brick tiles size adjustment. 
 - [ ] Hover Animation 
