@@ -49,11 +49,13 @@ public class Level extends GameStateItems {
 
     public void update() {
         curLevel = LevelManager.getLevel();
+        LevelManager.setTempLevel(curLevel);
         if (isMouseClicked) {
             if (getRect(backButton, backButtonX, backButtonY).contains(mousePoint)) {
                 reset();
                 GameState.state = GameState.MENU;
                 Menu.resetBooleans();
+                return;
             }
             if (getRect(LevelCompletedBg, lvlBgXCord[0], LvlComBgY).contains(mousePoint))
                 clickedLevel = 1;
@@ -67,9 +69,6 @@ public class Level extends GameStateItems {
                 clickedLevel = 5;
             if (clickedLevel <= curLevel && clickedLevel != 0) {
                 LevelManager.setLevel(clickedLevel);
-                Ball.reset();
-                BrickLoader.reset();
-                Paddle.reset();
                 reset();
                 GameState.state = GameState.PLAYING;
             }
@@ -78,6 +77,9 @@ public class Level extends GameStateItems {
 
     public void reset() {
         isMouseClicked = false;
+        Ball.reset();
+        BrickLoader.reset();
+        Paddle.reset();
     }
 
     public void render(Graphics2D g) {

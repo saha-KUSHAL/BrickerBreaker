@@ -4,6 +4,7 @@ import game.Game;
 import gameentity.Ball;
 import gameentity.BrickLoader;
 import gameentity.Paddle;
+import level.LevelManager;
 import utils.Load;
 
 import java.awt.*;
@@ -34,6 +35,8 @@ public class LevelPaused {
                 PlayState.state = PlayState.Playing;
                 Menu.resetBooleans();   // Resetting the mouse event booleans
                 GameState.state = GameState.MENU;
+                if(LevelManager.getTempLevel() > LevelManager.getLevel())
+                    LevelManager.setLevel(LevelManager.getTempLevel());
             }
         }
     }

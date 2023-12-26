@@ -5,6 +5,7 @@ import gameentity.Ball;
 import gameentity.Brick;
 import gameentity.BrickLoader;
 import gameentity.Paddle;
+import level.LevelManager;
 import utils.Load;
 import utils.Score;
 
@@ -56,6 +57,8 @@ public class Playing {
                 break;
             case Failed:
                 levelFailed.update();
+                if(LevelManager.getTempLevel() > LevelManager.getLevel())
+                    LevelManager.setLevel(LevelManager.getTempLevel());
                 break;
             case Completed:
                 levelCompleted.update();

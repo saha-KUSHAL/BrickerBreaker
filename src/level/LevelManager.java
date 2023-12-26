@@ -2,7 +2,8 @@ package level;
 
 public class LevelManager {
 
-    private static int currentLevel = 4;
+    private static int currentLevel = 3;
+    private static int tempLevel;
 
     public static int getLevel() {
         return currentLevel;
@@ -14,5 +15,13 @@ public class LevelManager {
 
     public static void incrementLevel() {
         currentLevel++;
+    }
+    public static void setTempLevel(int level) {
+        tempLevel = level;
+    }
+
+    public static int getTempLevel(){
+
+        return tempLevel;
     }
 }
