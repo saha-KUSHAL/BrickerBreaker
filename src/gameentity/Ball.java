@@ -139,4 +139,17 @@ public class Ball extends Entity implements GameEntity {
         // TODO Auto-generated method stub
 
     }
+
+    public void increaseVelocity(){
+        if(dx < 0)
+            dx = -3;
+        else
+            dx = 3;
+    }
+    public void decreaseVelocity(){
+        if( dx > 1)
+            dx--;
+        else if ( dx < -1)
+            dx++;
+    }
 }

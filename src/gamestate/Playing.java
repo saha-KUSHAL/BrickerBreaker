@@ -25,7 +25,6 @@ public class Playing {
     private BufferedImage pauseAndContinueButton[];
     private Point mousePoint;
     private int buttonX, buttonY;
-
     public Playing() {
         paddle = new Paddle();
         brickLoader = new BrickLoader();
@@ -138,7 +137,11 @@ public class Playing {
     }
 
     private void checkCollision() {
-        ball.checkCollision(paddle.getHitbox());
+
+        if(ball.checkCollision(paddle.getHitbox())){
+            // Increase ball speed
+            ball.increaseVelocity();
+        }
         ArrayList<Brick> brickArrayList = BrickLoader.getBricks();
 
         for (Brick br : brickArrayList) {
@@ -146,7 +149,8 @@ public class Playing {
                 // Check if the ball is collied with a brick
                 if (ball.checkCollision(br.getHitbox())) {
                     br.setHit();
-
+                    // Decrease the ball speed
+                    ball.decreaseVelocity();
                     // If the brick is fully destroyed
                     if (!br.isAlive) {
                         BrickLoader.BrickCount--;
