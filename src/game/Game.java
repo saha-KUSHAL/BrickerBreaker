@@ -6,7 +6,7 @@ public class Game implements Runnable {
     private final static short col = 18;
     private final static short row = 12;
     private static final int UPS = 200;
-    private static final int FPS = 120;
+    private static final int FPS = 60;
     public static float scale = 1f;
     public final static short TileSize = (short) (defaultTileSize * scale);
     public static int Width = TileSize * col;

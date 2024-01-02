@@ -6,12 +6,16 @@ import gameentity.Brick;
 import gameentity.BrickLoader;
 import gameentity.Paddle;
 import level.LevelManager;
+import sounds.SoundLoader;
 import utils.Load;
 import utils.Score;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Playing {
@@ -25,7 +29,8 @@ public class Playing {
     private BufferedImage pauseAndContinueButton[];
     private Point mousePoint;
     private int buttonX, buttonY;
-
+    private Clip paddleHit;
+    private SoundLoader soundLoader;
     public Playing() {
         paddle = new Paddle();
         brickLoader = new BrickLoader();
@@ -39,6 +44,15 @@ public class Playing {
         pauseAndContinueButton[0] = Load.LoadImage(Load.ContinueIcon);
         buttonX = Game.Width - 40;
         buttonY = 32;
+        soundLoader = new SoundLoader();
+        paddleHit = soundLoader.getClip(SoundLoader.paddleHit);
+        try {
+            paddleHit.open(soundLoader.getAudioStream(SoundLoader.paddleHit));
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void update() {
@@ -138,15 +152,17 @@ public class Playing {
     }
 
     private void checkCollision() {
-        ball.checkCollision(paddle.getHitbox());
+
+       if( ball.checkCollision(paddle.getHitbox())){
+           paddleHit.start();
+           paddleHit.setMicrosecondPosition(0);
+       }
         ArrayList<Brick> brickArrayList = BrickLoader.getBricks();
 
         for (Brick br : brickArrayList) {
-            if(br.isAlive) {
+            if(br.isAlive && (ball.checkCollision(br.getHitbox()))){
                 // Check if the ball is collied with a brick
-                if (ball.checkCollision(br.getHitbox())) {
                     br.setHit();
-
                     // If the brick is fully destroyed
                     if (!br.isAlive) {
                         BrickLoader.BrickCount--;
@@ -156,4 +172,3 @@ public class Playing {
             }
         }
     }
-}
