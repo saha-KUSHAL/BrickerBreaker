@@ -71,6 +71,17 @@ public class Playing {
                 ball.setPoition();
                 ball.update();
                 score.update();
+                if(isPlaying) {
+                    if(!levelBg1.isOpen()){
+                        try{
+                            levelBg1.open(soundLoader.getAudioStream(SoundLoader.levelBg1));
+                        }catch (Exception e){}
+                    }
+                    levelBg1.setMicrosecondPosition(0);
+                    levelBg1.loop(1);
+                    levelBg1.start();
+                    isPlaying = false;
+                }
                 if (!Ball.getALive())
                     PlayState.state = PlayState.Failed;
                 if (BrickLoader.BrickCount == 0) {
@@ -78,14 +89,17 @@ public class Playing {
                 }
                 break;
             case Failed:
+                levelBg1.close();
                 levelFailed.update();
                 if(LevelManager.getTempLevel() > LevelManager.getLevel())
                     LevelManager.setLevel(LevelManager.getTempLevel());
                 break;
             case Completed:
+                levelBg1.close();
                 levelCompleted.update();
                 break;
             case Paused:
+                levelBg1.stop();
                 levelPaused.update();
                 break;
             default:
@@ -164,19 +178,14 @@ public class Playing {
        if( ball.checkCollision(paddle.getHitbox())){
            paddleHit.start();
            paddleHit.setMicrosecondPosition(0);
+           ball.increaseVelocity();
        }
-
-        if(ball.checkCollision(paddle.getHitbox())){
-            // Increase ball speed
-            ball.increaseVelocity();
-        }
         ArrayList<Brick> brickArrayList = BrickLoader.getBricks();
 
         for (Brick br : brickArrayList) {
             if(br.isAlive && (ball.checkCollision(br.getHitbox()))){
                 // Check if the ball is collied with a brick
                     br.setHit();
-                    // Decrease the ball speed
                     ball.decreaseVelocity();
                     // If the brick is fully destroyed
                     if (!br.isAlive) {
