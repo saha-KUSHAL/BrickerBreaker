@@ -4,9 +4,9 @@
 - [x] HitBox decrease of Play Button 
 - [x] Level are getting set to lower through levels page.
 # Features
+### Q.O.L
 - [ ] Brick tiles size adjustment. 
-- [ ] Hover Animation 
-- [ ] Settings Page
-# Settings
+- [ ] Hover Animation
+### Settings
 - [ ] Level Difficulty 
 - [ ] Frame Rate

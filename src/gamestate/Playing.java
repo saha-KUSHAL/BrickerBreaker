@@ -6,12 +6,16 @@ import gameentity.Brick;
 import gameentity.BrickLoader;
 import gameentity.Paddle;
 import level.LevelManager;
+import sounds.SoundLoader;
 import utils.Load;
 import utils.Score;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Playing {
@@ -25,6 +29,9 @@ public class Playing {
     private BufferedImage pauseAndContinueButton[];
     private Point mousePoint;
     private int buttonX, buttonY;
+    private Clip paddleHit, levelBg1, brickBreak,hardHit;
+    private SoundLoader soundLoader;
+    public static boolean isPlaying ;
     public Playing() {
         paddle = new Paddle();
         brickLoader = new BrickLoader();
@@ -38,6 +45,22 @@ public class Playing {
         pauseAndContinueButton[0] = Load.LoadImage(Load.ContinueIcon);
         buttonX = Game.Width - 40;
         buttonY = 32;
+        soundLoader = new SoundLoader();
+        paddleHit = soundLoader.getClip(SoundLoader.paddleHit);
+        levelBg1 = soundLoader.getClip(SoundLoader.levelBg1);
+        brickBreak = soundLoader.getClip(SoundLoader.brickBreak);
+        hardHit = soundLoader.getClip(SoundLoader.hardHit);
+        try {
+            paddleHit.open(soundLoader.getAudioStream(SoundLoader.paddleHit));
+            levelBg1.open(soundLoader.getAudioStream(SoundLoader.levelBg1));
+            brickBreak.open(soundLoader.getAudioStream(SoundLoader.brickBreak));
+            hardHit.open(soundLoader.getAudioStream(SoundLoader.hardHit));
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        isPlaying = true;
     }
 
     public void update() {
@@ -138,6 +161,11 @@ public class Playing {
 
     private void checkCollision() {
 
+       if( ball.checkCollision(paddle.getHitbox())){
+           paddleHit.start();
+           paddleHit.setMicrosecondPosition(0);
+       }
+
         if(ball.checkCollision(paddle.getHitbox())){
             // Increase ball speed
             ball.increaseVelocity();
@@ -145,19 +173,24 @@ public class Playing {
         ArrayList<Brick> brickArrayList = BrickLoader.getBricks();
 
         for (Brick br : brickArrayList) {
-            if(br.isAlive) {
+            if(br.isAlive && (ball.checkCollision(br.getHitbox()))){
                 // Check if the ball is collied with a brick
-                if (ball.checkCollision(br.getHitbox())) {
                     br.setHit();
                     // Decrease the ball speed
                     ball.decreaseVelocity();
                     // If the brick is fully destroyed
                     if (!br.isAlive) {
+                        brickBreak.start();
+                        brickBreak.setMicrosecondPosition(0);
                         BrickLoader.BrickCount--;
                         BrickLoader.Score += br.getScore();
+                    }
+                    else
+                    {
+                        hardHit.start();
+                        hardHit.setMicrosecondPosition(0);
                     }
                 }
             }
         }
     }
-}

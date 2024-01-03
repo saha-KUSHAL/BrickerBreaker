@@ -2,7 +2,7 @@ package level;
 
 public class LevelManager {
 
-    private static int currentLevel = 3;
+    private static int currentLevel = 1;
     private static int tempLevel;
 
     public static int getLevel() {
