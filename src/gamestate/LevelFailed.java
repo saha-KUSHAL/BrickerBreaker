@@ -65,5 +65,6 @@ public class LevelFailed {
         BrickLoader.reset();
         Paddle.reset();
         Menu.resetBooleans();
+        Playing.isPlaying = true;
     }
 }

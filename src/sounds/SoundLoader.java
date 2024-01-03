@@ -8,8 +8,10 @@ import java.util.Scanner;
 
 import javax.sound.sampled.*;
 public class SoundLoader {
-    Clip clip;
     public static String paddleHit = "res/soundEffects/paddleHit.wav";
+    public static String levelBg1 = "res/soundEffects/level_music.wav";
+    public static String hardHit = "res/soundEffects/hardHit.wav";
+    public static String brickBreak = "res/soundEffects/brickBreak.wav";
     public Clip getClip(String audioEffect){
         AudioInputStream audioInputStream = getAudioStream(audioEffect);
         try {

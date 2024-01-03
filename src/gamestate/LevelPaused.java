@@ -64,5 +64,6 @@ public class LevelPaused {
         Ball.reset();
         BrickLoader.reset();
         Paddle.reset();
+        Playing.isPlaying=true;
     }
 }

@@ -29,8 +29,9 @@ public class Playing {
     private BufferedImage pauseAndContinueButton[];
     private Point mousePoint;
     private int buttonX, buttonY;
-    private Clip paddleHit;
+    private Clip paddleHit, levelBg1, brickBreak,hardHit;
     private SoundLoader soundLoader;
+    public static boolean isPlaying ;
     public Playing() {
         paddle = new Paddle();
         brickLoader = new BrickLoader();
@@ -46,13 +47,20 @@ public class Playing {
         buttonY = 32;
         soundLoader = new SoundLoader();
         paddleHit = soundLoader.getClip(SoundLoader.paddleHit);
+        levelBg1 = soundLoader.getClip(SoundLoader.levelBg1);
+        brickBreak = soundLoader.getClip(SoundLoader.brickBreak);
+        hardHit = soundLoader.getClip(SoundLoader.hardHit);
         try {
             paddleHit.open(soundLoader.getAudioStream(SoundLoader.paddleHit));
+            levelBg1.open(soundLoader.getAudioStream(SoundLoader.levelBg1));
+            brickBreak.open(soundLoader.getAudioStream(SoundLoader.brickBreak));
+            hardHit.open(soundLoader.getAudioStream(SoundLoader.hardHit));
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        isPlaying = true;
     }
 
     public void update() {
@@ -63,6 +71,17 @@ public class Playing {
                 ball.setPoition();
                 ball.update();
                 score.update();
+                if(isPlaying) {
+                    if(!levelBg1.isOpen()){
+                        try{
+                            levelBg1.open(soundLoader.getAudioStream(SoundLoader.levelBg1));
+                        }catch (Exception e){}
+                    }
+                    levelBg1.setMicrosecondPosition(0);
+                    levelBg1.loop(1);
+                    levelBg1.start();
+                    isPlaying = false;
+                }
                 if (!Ball.getALive())
                     PlayState.state = PlayState.Failed;
                 if (BrickLoader.BrickCount == 0) {
@@ -70,14 +89,17 @@ public class Playing {
                 }
                 break;
             case Failed:
+                levelBg1.close();
                 levelFailed.update();
                 if(LevelManager.getTempLevel() > LevelManager.getLevel())
                     LevelManager.setLevel(LevelManager.getTempLevel());
                 break;
             case Completed:
+                levelBg1.close();
                 levelCompleted.update();
                 break;
             case Paused:
+                levelBg1.stop();
                 levelPaused.update();
                 break;
             default:
@@ -165,8 +187,15 @@ public class Playing {
                     br.setHit();
                     // If the brick is fully destroyed
                     if (!br.isAlive) {
+                        brickBreak.start();
+                        brickBreak.setMicrosecondPosition(0);
                         BrickLoader.BrickCount--;
                         BrickLoader.Score += br.getScore();
+                    }
+                    else
+                    {
+                        hardHit.start();
+                        hardHit.setMicrosecondPosition(0);
                     }
                 }
             }

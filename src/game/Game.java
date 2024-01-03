@@ -1,5 +1,7 @@
 package game;
 
+import level.LevelManager;
+
 public class Game implements Runnable {
 
     private final static short defaultTileSize = 60;
@@ -16,8 +18,9 @@ public class Game implements Runnable {
     public GameWindow gameWindow;
     private Thread gameThread;
 
-    public Game(boolean debugState) {
+    public Game(boolean debugState, int level) {
         debug = debugState;
+        LevelManager.setLevel(level);
         gamePanel = new GamePanel();
         gameWindow = new GameWindow(gamePanel);
         gameLoop();
